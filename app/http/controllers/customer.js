@@ -11,7 +11,7 @@ const pendingCredits = (customerId)=>{
     // get all the pending credits of a particular customer
 
     let invoice = {
-        customerId: "998822",
+        merchantId: "998822",
         invoiceId: "123",
         dueData: "12-12-2020",
         summary: "A quick summary!!",
@@ -26,7 +26,7 @@ const paidHistory = (merchantId)=>{
     // get all the paid invoices of a particular merchant
 
     let invoice = {
-        customerId: "998822",
+        merchantId: "998822",
         invoiceId: "123",
         dueData: "12-12-2020",
         summary: "A quick summary!!",
