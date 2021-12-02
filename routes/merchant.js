@@ -49,7 +49,7 @@ router.get('/history', function(req, res, next) {
     }
 });
 
-router.post('/sendinvoice', function(req, res, next) {
+router.post('/sendreminder', function(req, res, next) {
     try{
         let response = sendReminder(123, 890, 345)
         res.json({

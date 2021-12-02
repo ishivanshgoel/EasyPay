@@ -5,90 +5,14 @@
     <center>
         <div>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">New Invoice</button>
-            <button type="button" class="btn btn-primary">Pending Credits</button>    
-            <button type="button" class="btn btn-warning">Previous History</button>
+            <button type="button" class="btn btn-primary" onclick="merchantPendingCredits()">Pending Credits</button>    
+            <button type="button" class="btn btn-warning" onclick="merchantPreviousHistory()">Previous History</button>
         </div>
     </center>
 
     <div style="margin: 40px;" class="container">
-        <div class="row">
-            <div class="col-3">
-                <div class="card" style="width: 18rem; margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Customer Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
-                        <p class="card-text">Here will be a quick Summary!</p>
-                        <button type="button" class="btn btn-success">Reminder</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card" style="width: 18rem; margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Customer Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
-                        <p class="card-text">Here will be a quick Summary!</p>
-                        <button type="button" class="btn btn-success">Reminder</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card" style="width: 18rem; margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Customer Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
-                        <p class="card-text">Here will be a quick Summary!</p>
-                        <button type="button" class="btn btn-success">Reminder</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card" style="width: 18rem; margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Customer Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
-                        <p class="card-text">Here will be a quick Summary!</p>
-                        <button type="button" class="btn btn-success">Reminder</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card" style="width: 18rem; margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Customer Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
-                        <p class="card-text">Here will be a quick Summary!</p>
-                        <button type="button" class="btn btn-success">Reminder</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card" style="width: 18rem; margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Customer Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
-                        <p class="card-text">Here will be a quick Summary!</p>
-                        <button type="button" class="btn btn-success">Reminder</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card" style="width: 18rem; margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Customer Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
-                        <p class="card-text">Here will be a quick Summary!</p>
-                        <button type="button" class="btn btn-success">Reminder</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
+        <div class="row" id="merchant_main">
+            
         </div>
     </div>
 
