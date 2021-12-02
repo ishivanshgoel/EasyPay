@@ -1,0 +1,131 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+
+    <center><h1 style="margin-top: 10px;">Merchant Dashboard</h1></center>
+    <center>
+        <div>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">New Invoice</button>
+            <button type="button" class="btn btn-primary">Pending Credits</button>    
+            <button type="button" class="btn btn-warning">Previous History</button>
+        </div>
+    </center>
+
+    <div style="margin: 40px;" class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="card" style="width: 18rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
+                        <p class="card-text">Here will be a quick Summary!</p>
+                        <button type="button" class="btn btn-success">Reminder</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
+                        <p class="card-text">Here will be a quick Summary!</p>
+                        <button type="button" class="btn btn-success">Reminder</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
+                        <p class="card-text">Here will be a quick Summary!</p>
+                        <button type="button" class="btn btn-success">Reminder</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
+                        <p class="card-text">Here will be a quick Summary!</p>
+                        <button type="button" class="btn btn-success">Reminder</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
+                        <p class="card-text">Here will be a quick Summary!</p>
+                        <button type="button" class="btn btn-success">Reminder</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
+                        <p class="card-text">Here will be a quick Summary!</p>
+                        <button type="button" class="btn btn-success">Reminder</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
+                        <p class="card-text">Here will be a quick Summary!</p>
+                        <button type="button" class="btn btn-success">Reminder</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">New Invoice</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Customer Id</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Amount (In Rupees)</label>
+                      <input type="number" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Summary</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1">
+                      </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Due Date</label>
+                        <input type="date" data-date-format="mm/dd/yyyy">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+<% include ../partials/footer %>

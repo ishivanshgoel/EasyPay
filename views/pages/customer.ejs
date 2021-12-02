@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+
+    <center><h1 style="margin-top: 10px;">Customer Dashboard</h1></center>
+    <center>
+        <div>
+            <button type="button" class="btn btn-primary">Pending</button>
+            <button type="button" class="btn btn-warning">Paid History</button>
+        </div>
+    </center>
+
+    <div style="margin: 40px;" class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="card" style="width: 18rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Merchant Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: 12/11/2020</h6>
+                        <p class="card-text">Here will be a quick Summary!</p>
+                        <button type="button" class="btn btn-success">Pay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<% include ../partials/footer %>

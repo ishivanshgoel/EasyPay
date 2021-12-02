@@ -1,16 +1,22 @@
 'use strict';
 
+const merchant = require('./merchant')
+const customer = require('./customer')
+
 module.exports = function(app) {
-    app.get('/', function(req, res) {
+
+    app.get('/', function(req, res, next) {
         res.render('pages/index');
     });
 
-    app.get('/generic', function(req, res) {
-        res.render('pages/generic');
-    });
+    // ==============
+    // merchant routes
+    // ===============
+    app.use("/merchant", merchant)
 
-    app.get('/element', function(req, res) {
-        res.render('pages/element');
-    });
-    
+    // ===============
+    // customer routes
+    // ===============
+    app.use("/customer", customer)
+
 };
