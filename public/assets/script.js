@@ -1,6 +1,51 @@
 console.log('Attached Script.js')
 
-function saveNewInvoice(){
+let errorDiv = document.getElementById('error_box')
+
+async function saveNewInvoice(){
+    try{
+        let cid = document.getElementById('newinvoice_cid').value 
+        let amount = document.getElementById('newinvoice_amount').value 
+        let summary = document.getElementById('newinvoice_summary').value 
+        let date = document.getElementById('newinvoice_ddate').value 
+        console.log(cid, amount, summary, date)
+        if(!amount || !cid || !summary || !date){
+            errorDiv.innerHTML += `
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> All fields are required.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `
+        } else{
+
+            let response = await fetch('/merchant/newInvoice', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    customerId: cid,
+                    amount: amount,
+                    sumary: summary,
+                    date: date
+                })
+            });
+
+            response = await response.json()
+            console.log('response ', response)
+            if(response.message == "success"){
+                errorDiv.innerHTML += `
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Invoice Id: ${response.data.invoiceId}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                `   
+            }
+
+        }
+
+    } catch(err){}
 
 }
 
