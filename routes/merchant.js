@@ -61,6 +61,7 @@ router.get('/pending', merchant, async function(req, res, next) {
 
 router.get('/history', merchant, async function(req, res, next) {
     try{
+        let merchantId = req.payload.userId
         let response = await previousHistory(merchantId)
         res.json({
             data: response,

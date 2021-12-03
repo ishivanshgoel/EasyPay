@@ -123,7 +123,7 @@ async function merchantPreviousHistory() {
                     `<div class="card" style="width: 18rem; margin-bottom: 10px;">
                     <div class="card-body">
                         <h5 class="card-title">Customer Id: ${d.customerId}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Paid On: ${d.dueData}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Paid On: ${d.due}</h6>
                         <p class="card-text">Summary: ${d.summary}!</p>
                         <span class="badge bg-primary">${d.status}</span>
                     </div>
@@ -226,7 +226,7 @@ async function customerPendingPayments() {
                     `<div class="card" style="width: 18rem; margin-bottom: 10px;">
                         <div class="card-body">
                             <h5 class="card-title">Merchant: ${d.merchantId}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.dueData}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.due}</h6>
                             <p class="card-text">${d.summary}!!</p>
                             <button type="button" class="btn btn-success" onClick="pay()">Pay</button>
                         </div>

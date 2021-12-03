@@ -1,4 +1,7 @@
 // customer controllers
+let Customer = require('../../models/customer')
+let Invoice = require('../../models/invoice')
+const {getMerchant} = require('./merchant')
 
 const pay = (customerId, merchantId, invoiceId)=>{
     return {
@@ -6,39 +9,32 @@ const pay = (customerId, merchantId, invoiceId)=>{
     }
 }
 
-const pendingCredits = (customerId)=>{
+const getCustomer = async(customerId)=>{
+    let cus = await Customer.findOne({ _id: customerId }).exec()
+    return cus
+} 
+
+const pendingCredits = async (customerId)=>{
 
     // get all the pending credits of a particular customer
-
-    let invoice = {
-        merchantId: "998822",
-        invoiceId: "123",
-        dueData: "12-12-2020",
-        summary: "A quick summary!!",
-        status: "notpaid"
-    }
-
-    return [invoice, invoice, invoice]
+    let invoice = await Invoice.find({ customerId: customerId, status: "notPaid" }).exec()
+    
+    return invoice
 }
 
-const paidHistory = (merchantId)=>{
+const paidHistory = async (customerId)=>{
 
     // get all the paid invoices of a particular merchant
 
-    let invoice = {
-        merchantId: "998822",
-        invoiceId: "123",
-        dueData: "12-12-2020",
-        summary: "A quick summary!!",
-        status: "paid"
-    }
+    let invoice = await Invoice.find({ customerId: customerId, status: "paid" }).exec()
 
-    return [invoice, invoice, invoice]
+    return invoice
 
 }
 
 module.exports = {
     pendingCredits,
     paidHistory,
-    pay
+    pay,
+    getCustomer
 }

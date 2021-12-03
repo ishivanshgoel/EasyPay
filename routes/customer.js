@@ -4,17 +4,37 @@ const router = express.Router()
 const {
     pendingCredits,
     paidHistory,
-    pay
+    pay,
+    getCustomer
 }  = require('../app/http/controllers/customer')
+const {verifyAccessToken} = require('../app/utils/jwt')
+const customer = require('../app/http/middlewares/customer')
 
-router.get('/', function(req, res) {
-    res.render('pages/customer');
-});
-
-router.get('/pending', function(req, res) {
+router.get('/', async function(req, res, next) {
 
     try{
-        let pending = pendingCredits(99988);
+        let token = req.query.token
+        if(!token) throw new Error('token not found')
+        let tokenValid = verifyAccessToken(token)
+        if(!tokenValid) throw new Error('invalid token')
+        console.log('Token Valid ', tokenValid)
+        let customer = await getCustomer(tokenValid.userId)
+        res.render('pages/customer', {
+            token: token,
+            customer: customer
+        });
+
+    } catch(err){
+        next(err)
+    }
+
+});
+
+router.get('/pending', customer, async function(req, res, next) {
+
+    try{
+        let customerId = req.payload.userId
+        let pending = await pendingCredits(customerId);
         res.json({
             data: pending,
             message: "success"
@@ -25,10 +45,11 @@ router.get('/pending', function(req, res) {
     
 });
 
-router.get('/paid', function(req, res) {
+router.get('/paid', customer, async function(req, res, next) {
 
     try{
-        let paid = paidHistory(99988);
+        let customerId = req.payload.userId
+        let paid = await paidHistory(customerId);
         res.json({
             data: paid,
             message: "success"

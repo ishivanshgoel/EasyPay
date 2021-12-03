@@ -1,5 +1,11 @@
 // merchant controllers
 const Invoice = require('../../models/invoice')
+const Merchant = require('../../models/merchant')
+
+const getMerchant = async(merchantId)=>{
+    let cus = await Merchant.findOne({ _id: merchantId }).exec()
+    return cus
+} 
 
 const generateNewInvoice = async (merchantId, customerId, amount, dueDate, summary)=>{
 
@@ -61,5 +67,6 @@ module.exports = {
     pendingCreditsMerchant,
     previousHistory,
     sendReminder,
-    deleteInvoice
+    deleteInvoice,
+    getMerchant
 }

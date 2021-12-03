@@ -1,14 +1,13 @@
-// customer middleware
-const {verifyAccessToekn} = require('../../utils/jwt')
+// merchant middleware
+const {verifyAccessToken} = require('../../utils/jwt')
 
 function auth(req, res, next){
     try{
+        if(!req.headers['authorization']) throw new Error('Unauthorized User')
 
-        if(!req.headers['Authorization']) throw new Error('Unauthorized User')
-
-        const token = req.headers['Authorization']
-
-        let tokenValid = verifyAccessToekn(token)
+        let token = req.headers['authorization']
+        token = token.replace(/['"]+/g, '')
+        let tokenValid = verifyAccessToken(token)
         if(tokenValid){
             req.payload = tokenValid
             next()

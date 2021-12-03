@@ -102,7 +102,8 @@ router.post('/login/customer', async function(req, res, next) {
         
         let response = await verifyCustomer(email, password)
         if(response.status == "success"){
-            res.redirect("/customer")
+            let token = signAcessToken(response._id)
+            res.redirect(`/customer?token=${token}`)
         } else throw new Error('Invalid Credentials')
     } catch(err){
         next(err)
