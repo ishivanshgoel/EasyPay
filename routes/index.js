@@ -21,7 +21,7 @@ module.exports = function(app) {
     // ==============
     // auth routes
     // ===============
-    app.use("/auth", auth)
+    app.use("/", auth)
 
     // ==============
     // merchant routes
