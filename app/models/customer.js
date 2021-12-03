@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 
-const schema = new mongoose.Schema({
+const customerSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
         unique: true
     },
     password: {
-        type: email,
+        type: String,
         required: true
     },
     name: {
@@ -24,4 +24,4 @@ const schema = new mongoose.Schema({
     }
 })
 
-mongoose.exports = mongoose.model('Customer', schema)
+mongoose.exports = mongoose.model('CustomerNew', customerSchema)
