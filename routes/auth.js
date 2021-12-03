@@ -6,6 +6,7 @@ const {
     verifyCustomer,
     verifyMerchant
 } = require('../app/http/controllers/auth')
+const {signAcessToken} = require('../app/utils/jwt')
 
 // render homepage
 router.get('/', function(req, res, next) {
@@ -82,7 +83,8 @@ router.post('/login/merchant', async function(req, res, next) {
         let response = await verifyMerchant(email, password)
         console.log('Repsonse ', response)
         if(response.status == "success"){
-            res.redirect("/merchant")
+            let token = signAcessToken(response._id)
+            res.redirect(`/merchant?token=${token}`) // redirect to merchant dashboard
         } else throw new Error('Invalid Credentials')
 
     } catch(err){

@@ -8,12 +8,29 @@ const {
     sendReminder,
     deleteInvoice
 } = require('../app/http/controllers/merchant')
+const {verifyAccessToken} = require('../app/utils/jwt')
+const merchant = require('../app/http/middlewares/merchant')
 
 router.get('/', function(req, res, next) {
-    res.render('pages/merchant');
+    try{
+        let token = req.query.token
+        if(!token) throw new Error('token not found')
+        let tokenValid = verifyAccessToken(token)
+        if(!tokenValid) throw new Error('invalid token')
+        console.log('Token Valid ', tokenValid)
+        res.render('pages/merchant', {
+            token: token
+        });
+
+    } catch(err){
+        next(err)
+    }
 });
 
-router.post('/newinvoice', function(req, res, next) {
+router.post('/newinvoice', merchant, function(req, res, next) {
+
+    console.log('New Invoice ',req.payload)
+
     try{
         let response = generateNewInvoice(123, 50, '12/12/2020')
         res.json({

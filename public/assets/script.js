@@ -2,6 +2,11 @@ console.log('Attached Script.js')
 
 let errorDiv = document.getElementById('error_box')
 
+// fetch token from local storage
+function getToken(){
+    return localStorage.getItem('token');
+}
+
 async function saveNewInvoice() {
     try {
         let cid = document.getElementById('newinvoice_cid').value
@@ -17,13 +22,14 @@ async function saveNewInvoice() {
             </div>
             `
         } else {
-
+            console.log('Token LS ', getToken())
             let response = await fetch('/merchant/newInvoice', {
                 method: 'POST',
-                headers: {
+                headers: new Headers({
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                    'Content-Type': 'application/json',
+                    'Authorization': `${getToken()}`, 
+                }),
                 body: JSON.stringify({
                     customerId: cid,
                     amount: amount,
@@ -42,7 +48,6 @@ async function saveNewInvoice() {
                 </div>
                 `
             }
-
         }
 
     } catch (err) { }
