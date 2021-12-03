@@ -188,7 +188,7 @@ async function payToMerchant(id, amount, sumary) {
     merchant = merchant.data
 
     let options = {
-        "key": "rzp_test_N3295ATbaLKKZ3", // Enter the Key ID generated from the Dashboard
+        "key": merchant.apiKey, // Enter the Key ID generated from the Dashboard
         "amount": amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         "currency": "INR",
         "name": merchant.name,
@@ -197,10 +197,6 @@ async function payToMerchant(id, amount, sumary) {
             alert(response.razorpay_payment_id);
             alert(response.razorpay_order_id);
             alert(response.razorpay_signature)
-        },
-        "prefill": {
-            "name": merchant.name,
-            "email": merchant.email,
         },
         "notes": {
             "address": merchant.address
@@ -252,7 +248,7 @@ async function customerPendingPayments() {
                             <h5 class="card-title">Merchant: ${d.merchantId}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Due On: ${(d.due).substring(0, 10)}</h6>
                             <p class="card-text"><div>${d.summary}</div><div>Amount: ${d.amount}</div></p>
-                            <button type="button" class="btn btn-success" onclick="payToMerchant('${id}', '${d.amount}', '${d.sumary}')"> Pay</button>
+                            <button type="button" class="btn btn-success" onclick="payToMerchant('${id}', '${d.amount}', '${d.summary}')"> Pay</button>
                         </div>
                     </div>`
                 container.appendChild(newDiv)
