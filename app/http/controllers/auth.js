@@ -33,7 +33,35 @@ const createNewMerchant = async (email, password, name, address, interestAmount,
     return merchant
 }
 
+const verifyCustomer = async (email, password)=>{
+
+    let customer = await Customer.findOne({ email }).exec()
+
+    if(customer.password == password){
+        customer["status"] = "success"
+        return customer
+    } else return {
+        message: "invalid"
+    }
+
+}
+
+const verifyMerchant = async(email, password)=>{
+
+    let merchant = await Merchant.findOne({ email }).exec()
+
+    if(merchant.password == password){
+        merchant["status"] = "success"
+        return merchant
+    } else return {
+        message: "invalid"
+    }
+
+}
+
 module.exports = {
     createNewCustomer,
-    createNewMerchant
+    createNewMerchant,
+    verifyCustomer,
+    verifyMerchant
 }

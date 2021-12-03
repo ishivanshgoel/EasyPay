@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 const {
     createNewCustomer,
-    createNewMerchant
+    createNewMerchant,
+    verifyCustomer,
+    verifyMerchant
 } = require('../app/http/controllers/auth')
 
 // render homepage
@@ -59,18 +61,51 @@ router.post('/register/customer', async function(req, res, next) {
     
 });
 
+// login merchant page
+router.get('/login/merchant', function(req, res, next) {
+    res.render('pages/merchantlogin');
+});
+
+// login customer page
+router.get('/login/customer', function(req, res, next) {
+    res.render('pages/customerlogin');
+});
+
 // register new merchant
-router.post('/login/merchant', function(req, res, next) {
-    res.json({
-        message: "success"
-    })
+router.post('/login/merchant', async function(req, res, next) {
+
+    try{
+
+        let {email, password} = req.body;
+        if(!email || !password) throw new Error('Parameters not found!')
+        
+        let response = await verifyMerchant(email, password)
+        console.log('Repsonse ', response)
+        if(response.status == "success"){
+            res.redirect("/merchant")
+        } else throw new Error('Invalid Credentials')
+
+    } catch(err){
+        next(err)
+    }
+
 });
 
 // register new customer
-router.post('/login/customer', function(req, res, next) {
-    res.json({
-        message: "success"
-    })
+router.post('/login/customer', async function(req, res, next) {
+
+    try{
+        let {email, password} = req.body;
+        if(!email || !password) throw new Error('Parameters not found!')
+        
+        let response = await verifyCustomer(email, password)
+        if(response.status == "success"){
+            res.redirect("/customer")
+        } else throw new Error('Invalid Credentials')
+    } catch(err){
+        next(err)
+    }
+
 });
 
 module.exports = router
