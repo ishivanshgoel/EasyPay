@@ -1,20 +1,21 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
 
-    <center><h1 style="margin-top: 10px;">Customer Dashboard</h1></center>
-    <center>
-        <div>
-            <button type="button" class="btn btn-primary" onclick="customerPendingPayments()">Pending</button>
-            <button type="button" class="btn btn-warning" onclick="customerPaidHistory()">Paid History</button>
-        </div>
-    </center>
+        <center>
+            <h1 style="margin-top: 10px;">Customer Dashboard</h1>
+        </center>
+        <center>
+            <div>
+                <button type="button" class="btn btn-primary" onclick="customerPendingPayments()">Pending</button>
+                <button type="button" class="btn btn-warning" onclick="customerPaidHistory()">Paid History</button>
+            </div>
+        </center>
 
-    <div style="margin: 40px;" class="container">
-        <div class="row" id="customer_main">
-            <div class="col-3">
+        <div style="margin: 40px;" class="container">
+            <div class="row" id="customer_main">
+                <div class="col-3">
+                </div>
             </div>
         </div>
-    </div>
-
 
 <% include ../partials/footer %>

@@ -144,6 +144,47 @@ function deleteInvoice() {
 
 }
 
+async function pay() {
+
+    let options = {
+        "key": "rzp_test_N3295ATbaLKKZ3", // Enter the Key ID generated from the Dashboard
+        "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Acme Corp",
+        "description": "Test Transaction",
+        "handler": function (response) {
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature)
+        },
+        "prefill": {
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9999999999"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+
+    let rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+    });
+    
+    rzp1.open();
+
+}
+
 async function customerPendingPayments() {
     try {
 
@@ -155,7 +196,7 @@ async function customerPendingPayments() {
         if (response.message == "success") {
             let data = response.data
             console.log('Data ', data)
-            data.map((d) => {
+            data.map((d, index) => {
                 let newDiv = document.createElement("div")
                 newDiv.classList.add("col-3")
                 newDiv.innerHTML =
@@ -164,7 +205,7 @@ async function customerPendingPayments() {
                             <h5 class="card-title">Merchant: ${d.merchantId}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.dueData}</h6>
                             <p class="card-text">${d.summary}!!</p>
-                            <button type="button" class="btn btn-success">Pay</button>
+                            <button type="button" class="btn btn-success" onClick="pay()">Pay</button>
                         </div>
                     </div>`
                 container.appendChild(newDiv)
