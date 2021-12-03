@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const schema = new mongoose.Schema({
+const schemaInvoice = new mongoose.Schema({
     merchantId: {
         type: String,
         required: true
@@ -19,4 +19,4 @@ const schema = new mongoose.Schema({
     }
 })
 
-mongoose.exports = mongoose.model('Invoice', schema)
+module.exports = mongoose.model('Invoice', schemaInvoice)

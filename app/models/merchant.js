@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const schema = new mongoose.Schema({
+const schemaMerchant = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -32,4 +32,4 @@ const schema = new mongoose.Schema({
     }
 })
 
-mongoose.exports = mongoose.model('Customer', schema)
+module.exports = mongoose.model('Merchant', schemaMerchant)

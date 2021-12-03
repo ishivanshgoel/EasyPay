@@ -1,14 +1,19 @@
 'use strict';
 
-var express = require('express');
-var routes = require('./routes/index.js');
-var port = process.env.PORT || 3000;
+const express = require('express');
+const routes = require('./routes/index.js');
+const port = process.env.PORT || 3000;
+const bodyParser = require('body-parser')
+require('dotenv').config()
+require('./app/config/db')()
 
-var app = express();
+const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/public', express.static(process.cwd() + '/public'));
 app.set('view engine', 'ejs');
-
 
 routes(app);
 
