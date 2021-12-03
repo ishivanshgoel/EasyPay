@@ -22,16 +22,10 @@ const generateNewInvoice = async (merchantId, customerId, amount, dueDate, summa
 const pendingCreditsMerchant = async (merchantId)=>{
 
     // get all the pending credits of a particular merchant
+    let invoice = await Invoice.find({ merchantId: merchantId, status: "notPaid" }).exec()
+    console.log("Invoices ", invoice)
+    return invoice
 
-    let invoice = {
-        customerId: "998822",
-        invoiceId: "123",
-        dueData: "12-12-2020",
-        summary: "A quick summary!!",
-        status: "notpaid"
-    }
-
-    return [invoice, invoice, invoice]
 }
 
 const previousHistory = async (merchantId)=>{

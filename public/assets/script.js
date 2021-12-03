@@ -60,7 +60,13 @@ async function merchantPendingCredits() {
 
         let container = document.getElementById('merchant_main')
         container.innerHTML = ""
-        let response = await fetch("/merchant/pending")
+        let response = await fetch("/merchant/pending", {
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `${getToken()}`, 
+            })
+        })
         response = await response.json()
 
         if (response.message == "success") {
@@ -73,9 +79,9 @@ async function merchantPendingCredits() {
                     `<div class="card" style="width: 18rem; margin-bottom: 10px;">
                     <div class="card-body">
                         <h5 class="card-title">Customer Id: ${d.customerId}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.dueData}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.due}</h6>
                         <p class="card-text">Summary: ${d.summary}!</p>
-                        <button type="button" class="btn btn-success" onclick="sendReminder(${d.customerId}, ${d.invoiceId})">Reminder</button>
+                        <button type="button" class="btn btn-success" onclick="sendReminder(${d.customerId}, ${d._id})">Reminder</button>
                         <button type="button" class="btn btn-danger">Delete</button>
                     </div>
                 </div>`
@@ -98,7 +104,13 @@ async function merchantPreviousHistory() {
 
         let container = document.getElementById('merchant_main')
         container.innerHTML = ""
-        let response = await fetch("/merchant/history")
+        let response = await fetch("/merchant/history",{
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `${getToken()}`, 
+            })
+        })
         response = await response.json()
 
         if (response.message == "success") {
@@ -195,7 +207,13 @@ async function customerPendingPayments() {
 
         let container = document.getElementById('customer_main')
         container.innerHTML = ""
-        let response = await fetch("/customer/pending")
+        let response = await fetch("/customer/pending", {
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `${getToken()}`, 
+            })
+        })
         response = await response.json()
 
         if (response.message == "success") {
@@ -230,7 +248,13 @@ async function customerPaidHistory() {
 
         let container = document.getElementById('customer_main')
         container.innerHTML = ""
-        let response = await fetch("/customer/paid")
+        let response = await fetch("/customer/paid", {
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `${getToken()}`, 
+            })
+        })
         response = await response.json()
 
         if (response.message == "success") {

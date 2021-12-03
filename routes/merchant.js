@@ -31,9 +31,9 @@ router.post('/newinvoice', merchant, async function(req, res, next) {
 
     console.log('New Invoice ',req.payload)
     let merchantId = req.payload.userId
-    console.log('Request Body ', req.body)
     const { customerId, amount, sumary, date} = req.body;
     console.log(customerId, amount, sumary, date)
+
     try{
         let response = await generateNewInvoice(merchantId, customerId, amount, date, sumary)
         res.json({
@@ -45,9 +45,11 @@ router.post('/newinvoice', merchant, async function(req, res, next) {
     }
 });
 
-router.get('/pending', function(req, res, next) {
+router.get('/pending', merchant, async function(req, res, next) {
     try{
-        let response = pendingCreditsMerchant(123)
+        
+        let merchantId = req.payload.userId
+        let response = await pendingCreditsMerchant(merchantId)
         res.json({
             data: response,
             message: "success"
@@ -57,9 +59,9 @@ router.get('/pending', function(req, res, next) {
     }
 });
 
-router.get('/history', function(req, res, next) {
+router.get('/history', merchant, async function(req, res, next) {
     try{
-        let response = previousHistory(123)
+        let response = await previousHistory(merchantId)
         res.json({
             data: response,
             message: "success"
@@ -69,9 +71,9 @@ router.get('/history', function(req, res, next) {
     }
 });
 
-router.post('/sendreminder', function(req, res, next) {
+router.post('/sendreminder', merchant, async function(req, res, next) {
     try{
-        let response = sendReminder(123, 890, 345)
+        let response = await sendReminder(123, 890, 345)
         res.json({
             data: response,
             message: "success"
@@ -81,7 +83,7 @@ router.post('/sendreminder', function(req, res, next) {
     }
 });
 
-router.delete('/invoice', function(req, res, next){
+router.delete('/invoice', async function(req, res, next){
     try{
         let response = deleteInvoice(123)
         res.json({
