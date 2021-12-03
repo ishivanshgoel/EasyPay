@@ -10,6 +10,14 @@ module.exports = function(app) {
         res.render('pages/index');
     });
 
+    app.get('/register/merchant', function(req, res, next) {
+        res.render('pages/merchantregister');
+    });
+
+    app.get('/register/customer', function(req, res, next) {
+        res.render('pages/customerregister');
+    });
+
     // ==============
     // auth routes
     // ===============
