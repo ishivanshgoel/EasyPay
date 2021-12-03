@@ -82,7 +82,6 @@ async function merchantPendingCredits() {
                         <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.due}</h6>
                         <p class="card-text">Summary: ${d.summary}!</p>
                         <button type="button" class="btn btn-success" onclick="sendReminder(${d.customerId}, ${d._id})">Reminder</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
                     </div>
                 </div>`
                 container.appendChild(newDiv)
