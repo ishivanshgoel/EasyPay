@@ -12,7 +12,6 @@ const {
 const {verifyAccessToken} = require('../app/utils/jwt')
 const merchant = require('../app/http/middlewares/merchant')
 
-
 router.get('/', async function(req, res, next) {
     try{
         let token = req.query.token
@@ -75,6 +74,19 @@ router.get('/history', merchant, async function(req, res, next) {
         next(err)
     }
 });
+
+router.post('/getInfo', async function(req, res, next){
+    try{
+        let {merchantId} = req.body;
+        console.log('Merchant Id ', merchantId)
+        let merchant = await getMerchant(merchantId)
+        res.json({
+            data: merchant
+        })
+    } catch(err){
+        next(err)
+    }
+})
 
 router.post('/sendreminder', merchant, async function(req, res, next) {
     try{

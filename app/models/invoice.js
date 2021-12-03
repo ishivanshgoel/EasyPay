@@ -21,6 +21,10 @@ const schemaInvoice = new mongoose.Schema({
         type: String,
         required: true
     },
+    amount: {
+        type: Number,
+        required: true
+    },
     created: {
         type: Date,
         default: Date.now

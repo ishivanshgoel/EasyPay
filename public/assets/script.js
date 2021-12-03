@@ -2,6 +2,8 @@ console.log('Attached Script.js')
 
 let errorDiv = document.getElementById('error_box')
 
+let merchantMap = {}
+
 // fetch token from local storage
 function getToken(){
     return localStorage.getItem('token');
@@ -43,7 +45,7 @@ async function saveNewInvoice() {
             if (response.message == "success") {
                 errorDiv.innerHTML += `
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success!</strong> Invoice Id: ${response.data.invoiceId}
+                    <strong>Success!</strong> Invoice Generated!
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 `
@@ -79,8 +81,9 @@ async function merchantPendingCredits() {
                     `<div class="card" style="width: 18rem; margin-bottom: 10px;">
                     <div class="card-body">
                         <h5 class="card-title">Customer Id: ${d.customerId}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.due}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Due On: ${(d.due).substring(0, 10)}</h6>
                         <p class="card-text">Summary: ${d.summary}!</p>
+                        <p class="card-text">Amount: ${d.amount}!</p>
                         <button type="button" class="btn btn-success" onclick="sendReminder(${d.customerId}, ${d._id})">Reminder</button>
                     </div>
                 </div>`
@@ -122,7 +125,7 @@ async function merchantPreviousHistory() {
                     `<div class="card" style="width: 18rem; margin-bottom: 10px;">
                     <div class="card-body">
                         <h5 class="card-title">Customer Id: ${d.customerId}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Paid On: ${d.due}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Paid On: ${(d.due).substring(0, 10)}</h6>
                         <p class="card-text">Summary: ${d.summary}!</p>
                         <span class="badge bg-primary">${d.status}</span>
                     </div>
@@ -160,26 +163,47 @@ function deleteInvoice() {
 
 }
 
-async function pay() {
+async function getMerchant(merchantId){
+
+    console.log('Pay function called', merchantId)
+    let response = await fetch('/merchant/getInfo', {
+        method: 'POST',
+        headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({
+            merchantId: merchantId,
+        })
+    });
+
+    response = await response.json()
+    return response
+
+}
+
+async function payToMerchant(id, amount, sumary) {
+    
+    let merchant = await getMerchant(id)
+    merchant = merchant.data
 
     let options = {
         "key": "rzp_test_N3295ATbaLKKZ3", // Enter the Key ID generated from the Dashboard
-        "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "amount": amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         "currency": "INR",
-        "name": "Acme Corp",
-        "description": "Test Transaction",
+        "name": merchant.name,
+        "description": sumary,
         "handler": function (response) {
             alert(response.razorpay_payment_id);
             alert(response.razorpay_order_id);
             alert(response.razorpay_signature)
         },
         "prefill": {
-            "name": "Gaurav Kumar",
-            "email": "gaurav.kumar@example.com",
-            "contact": "9999999999"
+            "name": merchant.name,
+            "email": merchant.email,
         },
         "notes": {
-            "address": "Razorpay Corporate Office"
+            "address": merchant.address
         },
         "theme": {
             "color": "#3399cc"
@@ -221,13 +245,14 @@ async function customerPendingPayments() {
             data.map((d, index) => {
                 let newDiv = document.createElement("div")
                 newDiv.classList.add("col-3")
+                let id=d.merchantId
                 newDiv.innerHTML =
                     `<div class="card" style="width: 18rem; margin-bottom: 10px;">
                         <div class="card-body">
                             <h5 class="card-title">Merchant: ${d.merchantId}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.due}</h6>
-                            <p class="card-text">${d.summary}!!</p>
-                            <button type="button" class="btn btn-success" onClick="pay()">Pay</button>
+                            <h6 class="card-subtitle mb-2 text-muted">Due On: ${(d.due).substring(0, 10)}</h6>
+                            <p class="card-text"><div>${d.summary}</div><div>Amount: ${d.amount}</div></p>
+                            <button type="button" class="btn btn-success" onclick="payToMerchant('${id}', '${d.amount}', '${d.sumary}')"> Pay</button>
                         </div>
                     </div>`
                 container.appendChild(newDiv)
@@ -266,7 +291,7 @@ async function customerPaidHistory() {
                     `<div class="card" style="width: 18rem; margin-bottom: 10px;">
                         <div class="card-body">
                             <h5 class="card-title">Merchant: ${d.merchantId}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Due On: ${d.dueData}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Due On: ${(d.due).substring(0, 10)}</h6>
                             <p class="card-text">${d.summary}!!</p>
                             <span class="badge bg-success">${d.status}</span>
                         </div>
