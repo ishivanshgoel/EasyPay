@@ -1,17 +1,25 @@
 // merchant controllers
+const Invoice = require('../../models/invoice')
 
-const generateNewInvoice = (customerId, amount, dueDate)=>{
+const generateNewInvoice = async (merchantId, customerId, amount, dueDate, summary)=>{
 
+    let invoice = new Invoice({
+        merchantId: merchantId,
+        customerId: customerId,
+        due: dueDate,
+        summary: summary,
+        amount: amount,
+        status: "notPaid"
+    })
+
+    await invoice.save()
+    console.log('New Invoice ', invoice)
     // save to the database
-    return {
-        invoiceId: "123",
-        status: "notPaid",
-        summary: ""
-    }
+    return invoice
     
 }
 
-const pendingCreditsMerchant = (merchantId)=>{
+const pendingCreditsMerchant = async (merchantId)=>{
 
     // get all the pending credits of a particular merchant
 
@@ -26,7 +34,7 @@ const pendingCreditsMerchant = (merchantId)=>{
     return [invoice, invoice, invoice]
 }
 
-const previousHistory = (merchantId)=>{
+const previousHistory = async (merchantId)=>{
 
     // get all the paid invoices of a particular merchant
 
@@ -42,13 +50,13 @@ const previousHistory = (merchantId)=>{
 
 }
 
-const sendReminder = (customerId, merchantId, invoiceId)=>{
+const sendReminder = async (customerId, merchantId, invoiceId)=>{
     return {
         message: "Reminder Sent!!"
     }
 }
 
-const deleteInvoice = (invoiceId)=>{
+const deleteInvoice = async (invoiceId)=>{
     return {
         message: "Deleted Successfully!!"
     }

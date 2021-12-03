@@ -11,6 +11,7 @@ const app = express();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.json())
 
 app.use('/public', express.static(process.cwd() + '/public'));
 app.set('view engine', 'ejs');

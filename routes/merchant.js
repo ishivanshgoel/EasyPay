@@ -27,12 +27,15 @@ router.get('/', function(req, res, next) {
     }
 });
 
-router.post('/newinvoice', merchant, function(req, res, next) {
+router.post('/newinvoice', merchant, async function(req, res, next) {
 
     console.log('New Invoice ',req.payload)
-
+    let merchantId = req.payload.userId
+    console.log('Request Body ', req.body)
+    const { customerId, amount, sumary, date} = req.body;
+    console.log(customerId, amount, sumary, date)
     try{
-        let response = generateNewInvoice(123, 50, '12/12/2020')
+        let response = await generateNewInvoice(merchantId, customerId, amount, date, sumary)
         res.json({
             data: response,
             message: "success"

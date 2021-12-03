@@ -13,6 +13,14 @@ const schemaInvoice = new mongoose.Schema({
         type: Date,
         required: true
     },
+    summary: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
+    },
     created: {
         type: Date,
         default: Date.now
