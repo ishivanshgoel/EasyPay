@@ -16,6 +16,43 @@
         </div>
     </div>
 
+    
+    <div id="details" style="margin-top: 30px; padding: 50px;">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Merchant Id</th>
+                <td><%= merchant['_id'] %> %></td>
+              </tr>
+              <tr>
+                <th scope="row">Email</th>
+                <td><%= merchant.email %></td>
+              </tr>
+              <tr>
+                <th scope="row">Name</th>
+                <td><%= merchant.name %></td>
+              </tr>
+              <tr>
+                <th scope="row">Address</th>
+                <td><%= merchant.address %></td>
+              </tr>
+              <tr>
+                <th scope="row">Interest Amount</th>
+                <td><%= merchant.interestAmount + '%' %></td>
+              </tr>
+              <tr>
+                <th scope="row">API Key</th>
+                <td><%= merchant.apiKey %></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">

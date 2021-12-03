@@ -6,20 +6,24 @@ const {
     pendingCreditsMerchant,
     previousHistory,
     sendReminder,
-    deleteInvoice
+    deleteInvoice,
+    getMerchant
 } = require('../app/http/controllers/merchant')
 const {verifyAccessToken} = require('../app/utils/jwt')
 const merchant = require('../app/http/middlewares/merchant')
 
-router.get('/', function(req, res, next) {
+
+router.get('/', async function(req, res, next) {
     try{
         let token = req.query.token
         if(!token) throw new Error('token not found')
         let tokenValid = verifyAccessToken(token)
         if(!tokenValid) throw new Error('invalid token')
         console.log('Token Valid ', tokenValid)
+        let merchant = await getMerchant(tokenValid.userId)
         res.render('pages/merchant', {
-            token: token
+            token: token,
+            merchant: merchant
         });
 
     } catch(err){
