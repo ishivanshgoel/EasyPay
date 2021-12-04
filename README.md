@@ -16,7 +16,7 @@ EasyPay is a platform for small businesses to maintain their customer accounts d
 3. `Reliable`, becuase payment is directly transfered to merchants account.
 4. Can pay using one click payment link received in SMS/ email from the merchant.
 
-# LICENSE
+## LICENSE
 MIT License
 
 Copyright (c) 2021 Shivansh Goel
