@@ -21,7 +21,7 @@ const newLink = async (name, email, description, contact)=>{
 
         let response = await instance.paymentLink.create({
             upi_link: false,
-            amount: 500,
+            amount: 500*100,
             currency: "INR",
             accept_partial: true,
             first_min_partial_amount: 100,
