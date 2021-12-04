@@ -7,8 +7,10 @@ const {
     previousHistory,
     sendReminder,
     deleteInvoice,
-    getMerchant
+    getMerchant,
+    newLink
 } = require('../app/http/controllers/merchant')
+const {getCustomer} = require('../app/http/controllers/customer')
 const {verifyAccessToken} = require('../app/utils/jwt')
 const merchant = require('../app/http/middlewares/merchant')
 
@@ -90,7 +92,12 @@ router.post('/getInfo', async function(req, res, next){
 
 router.post('/sendreminder', merchant, async function(req, res, next) {
     try{
-        let response = await sendReminder(123, 890, 345)
+        console.log('Sending Reminder')
+        let {customerId} = req.body;
+        let response = await sendReminder(123, 890, 345) // remove this
+        let customer = await getCustomer(customerId)
+
+        newLink(customer.name, customer.email, 'Payment Due', customer.phoneNumber)
         res.json({
             data: response,
             message: "success"

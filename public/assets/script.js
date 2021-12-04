@@ -84,7 +84,7 @@ async function merchantPendingCredits() {
                         <h6 class="card-subtitle mb-2 text-muted">Due On: ${(d.due).substring(0, 10)}</h6>
                         <p class="card-text">Summary: ${d.summary}!</p>
                         <p class="card-text">Amount: ${d.amount}!</p>
-                        <button type="button" class="btn btn-success" onclick="sendReminder(${d.customerId}, ${d._id})">Reminder</button>
+                        <button type="button" class="btn btn-success" onclick="sendReminder('${d.customerId}')">Reminder</button>
                     </div>
                 </div>`
                 container.appendChild(newDiv)
@@ -143,8 +143,24 @@ async function merchantPreviousHistory() {
 
 }
 
-function sendReminder(customerId, invoiceId) {
+async function sendReminder(cid) {
     try {
+
+        let response = await fetch('/merchant/sendreminder', {
+            method: 'POST',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `${getToken()}`, 
+            }),
+            body: JSON.stringify({
+                customerId: cid,
+            })
+        });
+
+        response = await response.json()
+        console.log('reminder ', response)
+
         errorDiv.innerHTML += `
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Success!</strong> Reminder Sent!
@@ -152,7 +168,9 @@ function sendReminder(customerId, invoiceId) {
             </div>
             `
 
-    } catch (err) { }
+    } catch (err) { 
+        console.log(err)
+    }
 
 }
 
