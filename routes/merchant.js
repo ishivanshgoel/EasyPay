@@ -96,8 +96,9 @@ router.post('/sendreminder', merchant, async function(req, res, next) {
         let {customerId} = req.body;
         let response = await sendReminder(123, 890, 345) // remove this
         let customer = await getCustomer(customerId)
-
-        newLink(customer.name, customer.email, 'Payment Due', customer.phoneNumber)
+        let merchantId = req.payload.userId
+        let merchant = await getMerchant(merchantId)
+        newLink(customer.name, customer.email, 'Payment Due', customer.phoneNumber, merchant.keyId, merchant.apiKey)
         res.json({
             data: response,
             message: "success"

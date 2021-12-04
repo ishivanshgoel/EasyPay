@@ -27,10 +27,10 @@ router.get('/register/customer', function(req, res, next) {
 router.post('/register/merchant', async function(req, res, next) {
     try{
         console.log('Merchant Register ', req.body)
-        let { email, password, name, address, interestAmount, apiKey } = req.body;
-        if(!email || !password || !name || !address || !interestAmount || !apiKey) throw new Error('All fields are required')
+        let { email, password, name, address, interestAmount, apiKey, keyId } = req.body;
+        if(!email || !password || !name || !address || !interestAmount || !apiKey || !keyId) throw new Error('All fields are required')
 
-        let response = await createNewMerchant(email, password, name, address, interestAmount, apiKey)
+        let response = await createNewMerchant(email, password, name, address, interestAmount, apiKey, keyId)
 
         res.json({
             message: "success",

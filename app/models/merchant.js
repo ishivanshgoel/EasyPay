@@ -22,6 +22,10 @@ const schemaMerchant = new mongoose.Schema({
         type: Number,
         required: true
     },
+    keyId: {
+        type: String,
+        required: true
+    },
     apiKey:{
         type: String,
         required: true

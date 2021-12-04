@@ -63,7 +63,13 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">API Key</th>
+            <th scope="row">Key Id</th>
+            <td>
+              <%= merchant.keyId %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Key Secret</th>
             <td>
               <%= merchant.apiKey %>
             </td>
@@ -84,11 +90,11 @@
           <div class="modal-body">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Customer Id</label>
-              <input type="text" class="form-control" id="newinvoice_cid" aria-describedby="emailHelp">
+              <input type="text" class="form-control" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Fee (In Rupees)</label>
-              <input type="number" class="form-control" id="newinvoice_amount">
+              <input type="number" class="form-control" >
             </div>
             <div class="mb-3">
               <label for="cars">Subscription Type:</label>
@@ -102,7 +108,7 @@
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Due Date</label>
-              <input type="date" data-date-format="mm/dd/yyyy" id="newinvoice_ddate">
+              <input type="date" data-date-format="mm/dd/yyyy">
             </div>
             <button onclick="" class="btn btn-primary">Submit</button>
           </div>

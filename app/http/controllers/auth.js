@@ -17,7 +17,7 @@ const createNewCustomer = async (email, password, name, phoneNumber)=>{
 }
 
 
-const createNewMerchant = async (email, password, name, address, interestAmount, apiKey)=>{
+const createNewMerchant = async (email, password, name, address, interestAmount, apiKey, keyId)=>{
 
     let merchant = new Merchant({
         email,
@@ -25,7 +25,8 @@ const createNewMerchant = async (email, password, name, address, interestAmount,
         name,
         address,
         interestAmount,
-        apiKey
+        apiKey,
+        keyId
     })
 
     await merchant.save()

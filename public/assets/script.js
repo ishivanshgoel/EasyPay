@@ -206,7 +206,7 @@ async function payToMerchant(id, amount, sumary) {
     merchant = merchant.data
 
     let options = {
-        "key": merchant.apiKey, // Enter the Key ID generated from the Dashboard
+        "key": merchant.keyId, // Enter the Key ID generated from the Dashboard
         "amount": amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         "currency": "INR",
         "name": merchant.name,

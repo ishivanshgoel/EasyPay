@@ -8,12 +8,12 @@ const getMerchant = async(merchantId)=>{
     return cus
 } 
 
-const newLink = async (name, email, description, contact)=>{
+const newLink = async (name, email, description, contact, key_id, key_secret)=>{
     try{
 
         let instance = new Razorpay({
-            key_id: 'rzp_test_N3295ATbaLKKZ3', // TODO: Fetch from merchant's db
-            key_secret: 'JvUyfam7fFg4ugYVh0a83iYh',
+            key_id: key_id, // TODO: Fetch from merchant's db
+            key_secret: key_secret,
         });        
 
         // convert contact to string
@@ -37,6 +37,7 @@ const newLink = async (name, email, description, contact)=>{
             },
             reminder_enable: true,
           })
+        console.log('Reminder ', response)
         return response
     } catch(err){
         console.log('Error ', err)
@@ -46,8 +47,10 @@ const newLink = async (name, email, description, contact)=>{
 }
 
 const generateNewInvoice = async (merchantId, customerId, amount, dueDate, summary)=>{
-
+    let inAm = 0
     let merchant = await getMerchant(merchantId)
+    if(!merchant) inAm = 1
+    else inAm = merchant.interestAmount
 
     let invoice = new Invoice({
         merchantId: merchantId,
@@ -56,7 +59,7 @@ const generateNewInvoice = async (merchantId, customerId, amount, dueDate, summa
         summary: summary,
         amount: amount,
         status: "notPaid",
-        interestAmount: merchant.interestAmount
+        interestAmount: inAm
     })
 
     await invoice.save()
