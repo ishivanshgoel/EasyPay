@@ -9,13 +9,16 @@ const getMerchant = async(merchantId)=>{
 
 const generateNewInvoice = async (merchantId, customerId, amount, dueDate, summary)=>{
 
+    let merchant = await getMerchant(merchantId)
+
     let invoice = new Invoice({
         merchantId: merchantId,
         customerId: customerId,
         due: dueDate,
         summary: summary,
         amount: amount,
-        status: "notPaid"
+        status: "notPaid",
+        interestAmount: merchant.interestAmount
     })
 
     await invoice.save()

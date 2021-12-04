@@ -242,13 +242,21 @@ async function customerPendingPayments() {
                 let newDiv = document.createElement("div")
                 newDiv.classList.add("col-3")
                 let id=d.merchantId
+                let date = new Date(d.due)
+                let now = new Date()
+                let amount=d.amount;
+                if(date.getTime() <= now.getTime()){
+                    amount = amount+(amount * d.interestAmount)/100;
+                    d.summary += ' (Overdue)'
+                }
+
                 newDiv.innerHTML =
                     `<div class="card" style="width: 18rem; margin-bottom: 10px;">
                         <div class="card-body">
                             <h5 class="card-title">Merchant: ${d.merchantId}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Due On: ${(d.due).substring(0, 10)}</h6>
-                            <p class="card-text"><div>${d.summary}</div><div>Amount: ${d.amount}</div></p>
-                            <button type="button" class="btn btn-success" onclick="payToMerchant('${id}', '${d.amount}', '${d.summary}')"> Pay</button>
+                            <p class="card-text"><div>${d.summary}</div><div>Amount: ${amount}</div></p>
+                            <button type="button" class="btn btn-success" onclick="payToMerchant('${id}', '${amount}', '${d.summary}')"> Pay</button>
                         </div>
                     </div>`
                 container.appendChild(newDiv)
