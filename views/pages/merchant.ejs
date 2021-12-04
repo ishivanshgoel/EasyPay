@@ -1,98 +1,161 @@
 <% include ../partials/header %>
-<% include ../partials/navbar %>
+  <% include ../partials/navbar %>
 
-    <center><h1 style="margin-top: 10px;">Merchant Dashboard</h1></center>
     <center>
-        <div>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">New Invoice</button>
-            <button type="button" class="btn btn-primary" onclick="merchantPendingCredits()">Pending Credits</button>    
-            <button type="button" class="btn btn-warning" onclick="merchantPreviousHistory()">Previous History</button>
-        </div>
+      <h1 style="margin-top: 10px;">Merchant Dashboard</h1>
+    </center>
+    <center>
+      <div>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">New
+          Invoice</button>
+        <button type="button" class="btn btn-primary" onclick="merchantPendingCredits()">Pending Credits</button>
+        <button type="button" class="btn btn-warning" onclick="merchantPreviousHistory()">Previous History</button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop">Recurring Payments</button>
+      </div>
     </center>
 
     <div style="margin: 40px;" class="container">
-        <div class="row" id="merchant_main">
-            
-        </div>
+      <div class="row" id="merchant_main">
+
+      </div>
     </div>
 
-    <center><h1 style="margin-top: 10px;">Merchant Details</h1></center>
+    <center>
+      <h1 style="margin-top: 10px;">Merchant Details</h1>
+    </center>
     <div id="details" style="margin-top: 30px; padding: 50px;">
-        <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Merchant Id</th>
-                <td><%= merchant['_id'] %> %></td>
-              </tr>
-              <tr>
-                <th scope="row">Email</th>
-                <td><%= merchant.email %></td>
-              </tr>
-              <tr>
-                <th scope="row">Name</th>
-                <td><%= merchant.name %></td>
-              </tr>
-              <tr>
-                <th scope="row">Address</th>
-                <td><%= merchant.address %></td>
-              </tr>
-              <tr>
-                <th scope="row">Interest Amount</th>
-                <td><%= merchant.interestAmount + '%' %></td>
-              </tr>
-              <tr>
-                <th scope="row">API Key</th>
-                <td><%= merchant.apiKey %></td>
-              </tr>
-            </tbody>
-          </table>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Merchant Id</th>
+            <td>
+              <%= merchant['_id'] %> %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Email</th>
+            <td>
+              <%= merchant.email %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Name</th>
+            <td>
+              <%= merchant.name %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Address</th>
+            <td>
+              <%= merchant.address %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Interest Amount</th>
+            <td>
+              <%= merchant.interestAmount + '%' %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">API Key</th>
+            <td>
+              <%= merchant.apiKey %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">New Invoice</h5>
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Recurring Payments Invoice</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Customer Id</label>
+              <input type="text" class="form-control" id="newinvoice_cid" aria-describedby="emailHelp">
             </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Customer Id</label>
-                    <input type="text" class="form-control" id="newinvoice_cid" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Amount (In Rupees)</label>
-                    <input type="number" class="form-control" id="newinvoice_amount">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Summary</label>
-                    <input type="text" class="form-control" id="newinvoice_summary">
-                    </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Due Date</label>
-                    <input type="date" data-date-format="mm/dd/yyyy" id="newinvoice_ddate">
-                </div>
-                <button onclick="saveNewInvoice()" class="btn btn-primary">Submit</button>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Fee (In Rupees)</label>
+              <input type="number" class="form-control" id="newinvoice_amount">
             </div>
-            <div class="modal-footer">
+            <div class="mb-3">
+              <label for="cars">Subscription Type:</label>
+
+              <select id="cars">
+                <option value="volvo">Monthly</option>
+                <option value="saab">Yearly</option>
+                <option value="mercedes">Quarterly</option>
+                <option value="audi">Semi-annually</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Due Date</label>
+              <input type="date" data-date-format="mm/dd/yyyy" id="newinvoice_ddate">
+            </div>
+            <button onclick="" class="btn btn-primary">Submit</button>
+          </div>
+          <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
 
-    <script>
-        let token = '<%- JSON.stringify(token) %>';
-        console.log('Token ', token)
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">New Invoice</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Customer Id</label>
+              <input type="text" class="form-control" id="newinvoice_cid" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Amount (In Rupees)</label>
+              <input type="number" class="form-control" id="newinvoice_amount">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Summary</label>
+              <input type="text" class="form-control" id="newinvoice_summary">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Due Date</label>
+              <input type="date" data-date-format="mm/dd/yyyy" id="newinvoice_ddate">
+            </div>
+            <button onclick="saveNewInvoice()" class="btn btn-primary">Submit</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        // set token to local storage
-        localStorage.setItem('token', token)
+
+
+    <script>
+      let token = '<%- JSON.stringify(token) %>';
+      console.log('Token ', token)
+
+      // set token to local storage
+      localStorage.setItem('token', token)
     </script>
 
-<% include ../partials/footer %>
+    <% include ../partials/footer %>
