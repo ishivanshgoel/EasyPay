@@ -1,6 +1,6 @@
-# EasyPay
+# TrustPay
 
-EasyPay is a platform for small businesses to maintain their customer accounts digitally. The sole vision behind the idea is to digitalise the accounts from RED book to the online portal/ application along with making it really easy for merchants to generate new invoices and accept payments directly in their bank account.
+TrustPay is a platform for small businesses to maintain their customer accounts digitally. The sole vision behind the idea is to digitalise the accounts from RED book to the online portal/ application along with making it really easy for merchants to generate new invoices and accept payments directly in their bank account.
 
 ## Features for Merchants
 1. It makes it `easy for merchants` to generate a `digital invoice` for customer.
